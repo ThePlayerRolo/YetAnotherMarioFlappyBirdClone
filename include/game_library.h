@@ -4,4 +4,5 @@
 #include <stdint.h>
 #include <libdragon.h>
 
-void loadGameSprite(int  SpriteINT, sprite_t  Sprite,  char  * File);
+int max(int a, int b);
+int min(int a, int b);

@@ -4,4 +4,6 @@
 #include <stdint.h>
 #include <libdragon.h>
 
-void loadGameSprite(int  SpriteINT, sprite_t  Sprite,  char  * File);
+
+extern struct CollisionBox GroundColl;
+void GroundInit(void);

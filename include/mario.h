@@ -7,6 +7,7 @@
 extern float MarioX; 
 extern float MarioY; 
 extern struct Vector2 MarioPos;
+extern struct CollisionBox MarioColl;
 extern int ActiveMarioFlag;
 void mario_init(void);
 void mario_flag_active(joypad_buttons_t * buttons);

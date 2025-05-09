@@ -6,4 +6,6 @@
 #include "../include/mario.h"
 #include "../include/game_graphics.h"
 #include "../include/types.h"
-extern const  joypad_buttons_t buttons;
+#include "../include/ground.h"
+#include "../include/game_library.h"
+
