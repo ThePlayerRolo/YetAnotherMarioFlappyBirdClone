@@ -3,8 +3,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <libdragon.h>
-#include "../include/mario.h"
-#include "../include/types.h"
+#include "../include/main.h"
 
 
 float MarioX;

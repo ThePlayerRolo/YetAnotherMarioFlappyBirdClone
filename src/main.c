@@ -4,12 +4,14 @@
 #include <string.h>
 #include <stdint.h>
 #include <libdragon.h>
-#include "../include/mario.h"
-#include "../include/types.h"
-    int MarioHeadSprite;
-    sprite_t *MarioHeadRender;
-    sprite_t *GroundRender;
-    int GroundTexture;
+#include "../include/main.h"
+
+
+int MarioHeadSprite;
+int GroundTexture;
+sprite_t *MarioHeadRender;
+sprite_t *GroundRender;
+
 
 //Loads Mario Head Sprite Into Memory
 void loadMarioHead(void) {
@@ -20,7 +22,7 @@ void loadMarioHead(void) {
 }
 //Loads Bottom Sprite Into Memory
 void loadBottom(void) {
-	    GroundTexture = dfs_open("GroundTexture.sprite");
+		GroundTexture = dfs_open("GroundTexture.sprite");
 	    GroundRender = malloc(dfs_size(GroundTexture));
 	    dfs_read(GroundRender, 1, dfs_size(GroundTexture), GroundTexture);
 	    dfs_close(GroundTexture);
@@ -28,8 +30,10 @@ void loadBottom(void) {
 
 //Loads all Textures into Memory
 void loadAllTextures(void) {
-    loadMarioHead();
-    loadBottom();
+	loadMarioHead();
+	loadBottom();
+	//loadGameSprite(MarioHeadSprite, MarioHeadRender, "./MarioHead.sprite");
+	//loadGameSprite(GroundTexture, GroundRender, "./GroundTexture.sprite");
 }
 
 /* main code entry point */

@@ -1,6 +1,6 @@
 V=1
 SRC_DIR=src
-INCLUDE_DIR=include
+SRC_BUILD_DIR=build/src
 BUILD_DIR=build
 IMAGES_DIR=images
 IMAGE_FILES:=$(wildcard $(IMAGES_DIR)/*.png)
@@ -10,7 +10,8 @@ include $(N64_INST)/include/n64.mk
 
 all: FirstProject.z64
 .PHONY: all
-OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o  $(BUILD_DIR)/$(SRC_DIR)/mario.o 
+
+OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o  $(BUILD_DIR)/$(SRC_DIR)/mario.o  $(BUILD_DIR)/$(SRC_DIR)/game_graphics.o 
 
 
 MKSPRITE_FLAGS = --compress 0 --format RGBA16
