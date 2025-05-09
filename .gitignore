@@ -1,0 +1,16 @@
+#Taken from N64Brew-GameJam2024  https://github.com/n64brew/N64brew-GameJam2024/blob/main/.gitignore
+.directory
+build/
+filesystem/
+*.z64
+.vscode/
+.idea/
+
+# Blender backup files
+*.blend[0-9]
+
+.DS_Store
+# IDE files
+cmake-*
+.idea
+CMakeLists.txt
