@@ -5,3 +5,4 @@
 #include <libdragon.h>
 
 
+extern const  joypad_buttons_t buttons;

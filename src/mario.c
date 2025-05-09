@@ -12,21 +12,22 @@ float MarioY;
 struct Vector2 MarioPos;
 int ActiveMarioFlag;
 
-
 //Initalize Mario
 void mario_init() {
     ActiveMarioFlag = FLAG_ACTIVE;
-    MarioX = 20;
-    MarioY = 200;
+    MarioX = 40;
+    MarioY = 50;
 }
 
 //FLAG_ACTIVE code
 void mario_flag_active(joypad_buttons_t * buttons) {
-    if (buttons->a && MarioY >= 50) {
+    if (buttons->a && MarioY >= 20) {
         MarioY -= 30;
     }
-    if (MarioY <= 200) {
+    if (MarioY <= 193) {
         MarioY++;
+    } else {
+        ActiveMarioFlag = FLAG_DEAD;
     }
 }
 
