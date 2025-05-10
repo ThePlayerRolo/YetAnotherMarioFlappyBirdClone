@@ -25,3 +25,9 @@ void Lesson2_Functions(void) {
     // Returns the counter-clockwise direction in a 2-way axis
     joypad_8way_t joypad_get_direction(joypad_port_t port, joypad_2d_t axes);
 }
+    if (firstbox->vec3.y <= secondBox->vec3.y){
+        if (secondBox->vec2.x >= firstbox->vec2.x - 10  &&  secondBox->vec1.x <= firstbox->vec1.x + 10) {
+            return 1;
+
+        }
+    }

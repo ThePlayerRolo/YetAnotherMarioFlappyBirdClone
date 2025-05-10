@@ -4,13 +4,13 @@
 #include <stdint.h>
 #include <libdragon.h>
 
-
+//Vector 2
 struct Vector2 {
     float x;
     float y;
 };
 
-
+//Collison Box Object.
 struct CollisionBox {
     //Top Left
     struct Vector2 vec1;
