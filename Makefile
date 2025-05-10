@@ -8,7 +8,7 @@ SPRITES_DIR=filesystem
 SPRITE_FILES=$(subst images,filesystem,$(IMAGE_FILES:.png=.sprite))
 include $(N64_INST)/include/n64.mk
 
-all: FirstProject.z64
+all: YAMarioFlappyBirdC.z64
 .PHONY: all
 
 OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o  $(BUILD_DIR)/$(SRC_DIR)/mario.o   $(BUILD_DIR)/$(SRC_DIR)/ground.o $(BUILD_DIR)/$(SRC_DIR)/game_library.o  $(BUILD_DIR)/$(SRC_DIR)/pipe.o 
@@ -25,15 +25,15 @@ $(SPRITE_FILES): $(IMAGE_FILES)
 
 
 
-FirstProject.z64: N64_ROM_TITLE = "First Project"
-FirstProject.z64: $(SPRITE_FILES)
-FirstProject.z64: $(BUILD_DIR)/FirstProject.dfs
-FirstProject.z64: $(BUILD_DIR)/$(SRC_DIR)
+YAMarioFlappyBirdC.z64: N64_ROM_TITLE = "YAMarioFlappyBirdC"
+YAMarioFlappyBirdC.z64: $(SPRITE_FILES)
+YAMarioFlappyBirdC.z64: $(BUILD_DIR)/YAMarioFlappyBirdC.dfs
+YAMarioFlappyBirdC.z64: $(BUILD_DIR)/$(SRC_DIR)
 
 
 
-$(BUILD_DIR)/FirstProject.elf: $(OBJS)
-$(BUILD_DIR)/FirstProject.dfs: $(wildcard $(SPRITES_DIR))
+$(BUILD_DIR)/YAMarioFlappyBirdC.elf: $(OBJS)
+$(BUILD_DIR)/YAMarioFlappyBirdC.dfs: $(wildcard $(SPRITES_DIR))
 
 clean:
 	rm -rf $(BUILD_DIR) *.z64

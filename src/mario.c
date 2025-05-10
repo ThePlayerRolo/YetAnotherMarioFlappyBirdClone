@@ -33,13 +33,12 @@ void mario_flag_active(joypad_buttons_t * buttons) {
     if (buttons->a && MarioY >= 20) {
         MarioY -= 30;
     }
-    //if (MarioY <= 193) {
         MarioY++;
-    //}
 }
 void mario_collison() {
-    int GroundCheck = Collision_Check(&MarioColl, &PipeTopColl);
-    if (GroundCheck == 1) {
+    int PipeTopCheck = Collision_Check(&MarioColl, &PipeTopColl);
+    int PipeBottomCheck = Collision_Check(&MarioColl, &PipeBottomColl);
+    if (PipeTopCheck == 1 || PipeBottomCheck == 1) {
         ActiveMarioFlag = FLAG_DEAD;
     }
 

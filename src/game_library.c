@@ -15,14 +15,6 @@ int min(int a, int b) {
     return (a < b) ? a : b;
 }
 
-//TODO: Fix TO actually work
-void loadGameSprite(int  SpriteINT, sprite_t  * Sprite,  char * File) {
-    	SpriteINT = dfs_open(File);
-	    Sprite = malloc(dfs_size(SpriteINT));
-	    dfs_read(&Sprite, 1, dfs_size(SpriteINT), SpriteINT);
-	    dfs_close(SpriteINT);
-
-}
 // Collision Code
 bool Collision_Check(struct CollisionBox *firstbox, struct CollisionBox *secondBox)
 {
@@ -31,7 +23,7 @@ bool Collision_Check(struct CollisionBox *firstbox, struct CollisionBox *secondB
     //firstbox->vec1.x < secondBox->vec1.x && firstbox->vec4.x < secondBox->vec4.x
     //firstbox->vec3.y < secondBox->vec3.y && firstbox->vec4.y < secondBox->vec4.y
     //firstbox->vec2.x > secondBox->vec2.x && firstbox->vec3.x > secondBox->vec3.x
-    if (firstbox->vec1.y >= secondBox->vec1.y - 15 && firstbox->vec3.y <= secondBox->vec3.y + 20){
+    if (firstbox->vec1.y >= secondBox->vec1.y - 15 && firstbox->vec3.y <= secondBox->vec3.y + 15){
         if (secondBox->vec2.x >= firstbox->vec2.x  &&  secondBox->vec1.x <= firstbox->vec1.x) {
             return 1;
 
