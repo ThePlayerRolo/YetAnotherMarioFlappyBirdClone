@@ -2,7 +2,7 @@ V=1
 SRC_DIR=src
 SRC_BUILD_DIR=build/src
 BUILD_DIR=build
-IMAGES_DIR=images
+IMAGES_DIR=assets
 IMAGE_FILES:=$(wildcard $(IMAGES_DIR)/*.png)
 SPRITES_DIR=filesystem
 SPRITE_FILES=$(subst images,filesystem,$(IMAGE_FILES:.png=.sprite))

@@ -11,6 +11,7 @@ float PipeTopX;
 float PipeTopY; 
 float PipeBottomX;
 float PipeBottomY;
+int ActivePipeFlag;
 struct Vector2 PipeBottomPos;
 struct Vector2 PipeTopPos;
 struct CollisionBox PipeTopColl;
@@ -18,7 +19,11 @@ struct CollisionBox PipeBottomColl;
 
 
 
+
+
+
 void pipe_top_init() {
+    ActivePipeFlag = PIPE_FLAG_ACTIVE;
     PipeTopX = 330;
     PipeTopY = -20;
     PipeTopPos.x = PipeTopX;
@@ -34,15 +39,15 @@ void pipe_top_init() {
 
 };
 
+
 void pipe_top_update() {
-    if (PipeTopPos.x <= -50) {
-        PipeTopX = 330;
-        PipeTopY = -20;
-    }
-    if (ActiveMarioFlag != FLAG_DEAD) {
+    if (ActivePipeFlag == PIPE_FLAG_ACTIVE) {
+        if (PipeTopPos.x <= -50) {
+            PipeTopX = 330;
+            PipeTopY = -20;
+        }
         PipeTopX--;
     }
-
     PipeTopPos.x = PipeTopX;
     PipeTopPos.y = PipeTopY;
     PipeTopColl.vec1.x = PipeTopPos.x + 5;
@@ -71,14 +76,13 @@ void pipe_bottom_init() {
 
 };
 void pipe_bottom_update() {
-    if (PipeBottomPos.x <= -50) {
-        PipeBottomX = 330;
-        PipeBottomY = 130;
-    }
-    if (ActiveMarioFlag != FLAG_DEAD) {
+    if (ActivePipeFlag == PIPE_FLAG_ACTIVE) {
+       if (PipeBottomPos.x <= -50) {
+            PipeBottomX = 330;
+            PipeBottomY = 130;
+        }
         PipeBottomX--;
     }
-
     PipeBottomPos.x = PipeBottomX;
     PipeBottomPos.y = PipeBottomY;
     PipeTopColl.vec1.x = PipeBottomPos.x + 5;
