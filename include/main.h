@@ -8,4 +8,6 @@
 #include "../include/ground.h"
 #include "../include/game_library.h"
 #include "../include/pipe.h"
+#include "../include/score.h"
 
+extern int BoolStart;

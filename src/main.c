@@ -9,6 +9,9 @@ sprite_t *MarioHeadSprite;
 sprite_t *GroundSprite;
 sprite_t * PipeSprite;
 sprite_t * BottomPipeSprite;
+sprite_t * ScoreBOxSprite;
+sprite_t * PixelTestSprite;
+int BoolStart;
 
 //Loads all Textures into Memory
 void loadAllTextures(void) {
@@ -16,6 +19,10 @@ void loadAllTextures(void) {
 	BottomPipeSprite = sprite_load("rom://PipeBottom.sprite");
 	GroundSprite = sprite_load("rom://GroundTexture.sprite");
 	MarioHeadSprite = sprite_load("rom://MarioHead.sprite");
+	ScoreBOxSprite = sprite_load("rom://TestBox.sprite");
+	PixelTestSprite = sprite_load("rom://PixelTest.sprite");
+
+
 }
 
 void render() {
@@ -24,6 +31,11 @@ void render() {
 	Sky.r = 61;
 	Sky.g = 205;
 	Sky.b = 227;
+	color_t Test;
+	Test.a = 255;
+	Test.r = 255;
+	Test.g = 0;
+	Test.b = 0;
 	surface_t * disp;
 	disp = display_get();
 	rdpq_attach_clear(disp, NULL);
@@ -61,8 +73,30 @@ void render() {
         .width = 0, 
         .flip_x = 0
     });
+		/*rdpq_sprite_blit(ScoreBOxSprite, PipeTopPos.x, 60, &(rdpq_blitparms_t){
+         .s0 = 0, 
+         .cx = 0,
+        .cy = 0,
+        .width = 0, 
+        .flip_x = 0
+    });
+	//First is PipeTopPos.x, 60 
+rdpq_sprite_blit(PixelTestSprite, PipeTopPos.x, 60, &(rdpq_blitparms_t){
+         .s0 = 0, 
+         .cx = 0,
+        .cy = 0,
+        .width = 0, 
+        .flip_x = 0
+    }); */
 		rdpq_detach_show();
 }
+void ButtonStartCheck(joypad_buttons_t buttons) {
+	if (buttons.start == 1) {
+		BoolStart = !BoolStart;
+	}
+
+}
+
 /* main code entry point */
 int main(void)
 {
@@ -76,15 +110,18 @@ int main(void)
 	pipe_top_init();
 	pipe_bottom_init();
 	loadAllTextures();
+	BoolStart = 0;
 	// Main loop
 	while (1) {
         joypad_poll();
         joypad_port_t port = 0;
         if (joypad_is_connected(port)) {
             buttons = joypad_get_buttons_pressed(port);
+			ButtonStartCheck(buttons);
 			pipe_top_update();
 			pipe_bottom_update();
             mario_update(&buttons);
+
         }
 		render();
 	}

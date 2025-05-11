@@ -12,9 +12,10 @@ struct Vector2 MarioPos;
 struct CollisionBox MarioColl;
 int ActiveMarioFlag;
 
+
 //Initalize Mario
 void mario_init() {
-    ActiveMarioFlag = FLAG_ACTIVE;
+    ActiveMarioFlag = FLAG_PAUSED;
     MarioX = 40;
     MarioY = 50;
     MarioColl.vec1.x = MarioPos.x; 
@@ -47,10 +48,21 @@ void mario_collison() {
 //Overall Mario_Update Function
 void mario_update(joypad_buttons_t * buttons) {
     //Collision_Check(&MarioColl, &GroundColl);
-    mario_collison();
     //TODO: Switch to a switch case for optimization
-    if (ActiveMarioFlag == FLAG_ACTIVE) {
+    switch (ActiveMarioFlag)
+    {
+    case FLAG_ACTIVE:
+        if (BoolStart == 0) {
+            ActiveMarioFlag = FLAG_PAUSED;
+        }
+        mario_collison();
         mario_flag_active(buttons);
+        break;
+    
+    case FLAG_PAUSED:
+        if (BoolStart == 1) {
+            ActiveMarioFlag = FLAG_ACTIVE;
+        }
     }
     MarioPos.x = MarioX;
     MarioPos.y = MarioY;
