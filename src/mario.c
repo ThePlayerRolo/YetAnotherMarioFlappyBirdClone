@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <libdragon.h>
 #include "../include/main.h"
 
@@ -11,8 +12,9 @@ float MarioY;
 struct Vector2 MarioPos;
 struct CollisionBox MarioColl;
 int ActiveMarioFlag;
-
-
+wav64_t YahooWav;
+wav64_t PointWav;
+wav64_t WAAHWav;
 //Initalize Mario
 void mario_init() {
     ActiveMarioFlag = FLAG_PAUSED;
@@ -32,6 +34,8 @@ void mario_init() {
 //FLAG_ACTIVE code
 void mario_flag_active(joypad_buttons_t * buttons) {
     if (buttons->a && MarioY >= 20) {
+        wav64_open(&YahooWav, "rom:/Yahoo.wav64");
+        wav64_play(&YahooWav, 1);
         MarioY -= 30;
     }
         MarioY++;
@@ -39,8 +43,23 @@ void mario_flag_active(joypad_buttons_t * buttons) {
 void mario_collison() {
     int PipeTopCheck = Collision_Check(&MarioColl, &PipeTopColl);
     int PipeBottomCheck = Collision_Check(&MarioColl, &PipeBottomColl);
+    int ScoreBoxCheck = Collision_Check(&MarioColl, &ScoreBoxColl);
     if (PipeTopCheck == 1 || PipeBottomCheck == 1) {
         ActiveMarioFlag = FLAG_DEAD;
+        ActivePipeFlag = PIPE_FLAG_DEAD;
+        ActiveScoreFlag = SCORE_FLAG_DEAD;
+        wav64_open(&WAAHWav, "rom:/Waaah.wav64");
+        wav64_play(&WAAHWav, 2);
+    }
+    if (ScoreBoxCheck == 1 && ScoreDebounce == 0) {
+        ScoreDebounce = 1;
+        //Ensure  no   integer overflow for the text
+        if (score < 999999) {
+            score ++;
+            wav64_open(&PointWav, "rom:/Point.wav64");
+            wav64_play(&PointWav, 2);
+        }
+
     }
 
 

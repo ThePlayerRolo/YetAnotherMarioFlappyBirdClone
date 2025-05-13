@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <libdragon.h>
 
 

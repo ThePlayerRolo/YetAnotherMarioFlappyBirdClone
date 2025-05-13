@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <libdragon.h>
 #include "../include/main.h"
 
@@ -20,7 +21,7 @@ bool Collision_Check(struct CollisionBox *firstbox, struct CollisionBox *secondB
 {
     // Right is +, Left is - Up is - and Down is +
     //TODO: Make this not need the extra addition/subtraction
-    if (firstbox->vec1.y >= secondBox->vec1.y - 15 && firstbox->vec3.y <= secondBox->vec3.y + 15){
+    if (firstbox->vec1.y >= secondBox->vec1.y && firstbox->vec3.y <= secondBox->vec3.y){
         if (secondBox->vec2.x >= firstbox->vec2.x  &&  secondBox->vec1.x <= firstbox->vec1.x) {
             return 1;
 
@@ -28,3 +29,4 @@ bool Collision_Check(struct CollisionBox *firstbox, struct CollisionBox *secondB
     }
     return 0;
 }
+

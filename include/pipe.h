@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <libdragon.h>
 
 
@@ -21,4 +22,5 @@ void pipe_bottom_update(void);
 enum  PipeFlags {
     PIPE_FLAG_PAUSED = 0,
     PIPE_FLAG_ACTIVE = 1,
+    PIPE_FLAG_DEAD = 2
 };
