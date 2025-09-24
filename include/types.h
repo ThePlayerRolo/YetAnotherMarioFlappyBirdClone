@@ -10,3 +10,9 @@ typedef unsigned long long u64;
 typedef long long        s64;
 typedef float            f32;
 typedef double           f64;
+
+typedef struct {
+    f32 x;
+    f32 y;
+} Vector2;
+

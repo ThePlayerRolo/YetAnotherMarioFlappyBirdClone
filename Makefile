@@ -22,7 +22,7 @@ include $(N64_INST)/include/n64.mk
 all: YAMarioFlappyBirdC.z64
 .PHONY: all
 
-OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o $(BUILD_DIR)/$(SRC_DIR)/util.o 
+OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o $(BUILD_DIR)/$(SRC_DIR)/util.o $(BUILD_DIR)/$(SRC_DIR)/collision.o  $(BUILD_DIR)/$(SRC_DIR)/input.o  $(BUILD_DIR)/$(SRC_DIR)/mario.o   $(BUILD_DIR)/$(SRC_DIR)/game.o 
 
 
 MKSPRITE_FLAGS = --compress 0 --format RGBA16

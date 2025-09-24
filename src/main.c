@@ -6,17 +6,11 @@
 #include <libdragon.h>
 #include "../include/util.h"
 #include "../include/types.h"
+#include "../include/input.h"
+#include "../include/mario.h"
+#include "../include/game.h"
 
-//Returns the buttons
-joypad_buttons_t handleButtons() {
-	joypad_buttons_t buttons;
-	joypad_poll();
-    joypad_port_t port = 0;
-    if (joypad_is_connected(port)) {
-        buttons = joypad_get_buttons_pressed(port);
-    }
-	return buttons;
-}
+Mario* mario;
 
 void render() {
 	surface_t * disp;
@@ -27,6 +21,7 @@ void render() {
 	rdpq_fill_rectangle(0,0, 320,240);
 	rdpq_set_mode_standard();
 	rdpq_mode_alphacompare(1);
+	marioDraw(mario);
 	rdpq_detach_show();
 }
 /* main code entry point */
@@ -38,11 +33,14 @@ int main(void)
     mixer_init(4);
 	rdpq_init();
 	joypad_init();
+	switchGameState(STATE_GAME);
+	mario = marioInit(SetVector2(50,120));
 
 	while(1) {
-		joypad_buttons_t buttons = handleButtons();
+		handleButtons();
+		marioUpdate(mario);
 		render();
 	}
-
+	free(mario);
 	return 0;
 }
