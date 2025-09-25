@@ -9,19 +9,21 @@
 #include "../include/input.h"
 #include "../include/mario.h"
 #include "../include/game.h"
+#include "../include/pipe.h"
 
 Mario* mario;
 
+
 void render() {
-	surface_t * disp;
-	disp = display_get();
+	surface_t * disp = display_get();
 	rdpq_attach_clear(disp, NULL);
-	color_t Sky = SetColor(61,205,227,255);
-	rdpq_set_mode_fill(Sky);
+	rdpq_set_mode_fill(SetColor(61,205,227,255)); //Sky
 	rdpq_fill_rectangle(0,0, 320,240);
 	rdpq_set_mode_standard();
 	rdpq_mode_alphacompare(1);
 	marioDraw(mario);
+	pipeDraw(pipeBottom);
+	pipeDraw(pipeTop);
 	rdpq_detach_show();
 }
 /* main code entry point */
@@ -33,12 +35,16 @@ int main(void)
     mixer_init(4);
 	rdpq_init();
 	joypad_init();
-	switchGameState(STATE_GAME);
-	mario = marioInit(SetVector2(50,120));
-
+	switchGameState(STATE_TITLE);
+	mario = marioInit(SetVector2(50.0f,120.0f));
+	pipeBottom = pipeInit(SetVector2(PIPE_START, PipeYValues[0].x), false);
+	pipeTop = pipeInit(SetVector2(PIPE_START, PipeYValues[0].y), true);
 	while(1) {
 		handleButtons();
+		manageStates();
 		marioUpdate(mario);
+		pipeUpdate(pipeBottom);
+		pipeUpdate(pipeTop);
 		render();
 	}
 	free(mario);

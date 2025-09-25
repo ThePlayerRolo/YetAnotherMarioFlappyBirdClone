@@ -12,9 +12,12 @@
 typedef enum GAME_STATES {
     STATE_TITLE = 0,
     STATE_GAME = 1,
-    STATE_ENDSCREEN = 2,
+    STATE_GAME_PAUSED = 2,
+    STATE_ENDSCREEN = 3,
 } GAME_STATES;
 
 extern GAME_STATES curGameState;
 
 void switchGameState(GAME_STATES);
+
+void manageStates();

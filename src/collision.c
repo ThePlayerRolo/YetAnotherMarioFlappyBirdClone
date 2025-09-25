@@ -19,10 +19,9 @@ CollisionBox initCollisionBox(Vector2 Pos, f32 width, f32 height) {
 //Uses raylibs implementation as reference: https://github.com/raysan5/raylib/blob/ca33d495b334232c073a5778869c68400c2022fa/src/rshapes.c#L2271
 bool checkIfCollide(CollisionBox *firstbox, CollisionBox *secondBox) {
     bool isCollide = false;
-    if (firstbox->pos.x < (secondBox->pos.x + secondBox->width) && (firstbox->pos.x + firstbox->width)  > secondBox->pos.x) {
-         if (firstbox->pos.y < (secondBox->pos.y + secondBox->width) && (firstbox->pos.y + firstbox->width)  > secondBox->pos.y) {
+    if (firstbox->pos.x < (secondBox->pos.x + secondBox->width) && (firstbox->pos.x + firstbox->width)  > secondBox->pos.x &&
+        firstbox->pos.y < (secondBox->pos.y + secondBox->height) && (firstbox->pos.y + firstbox->height)  > secondBox->pos.y) {
             isCollide = true;
-         }
     }
     return isCollide;
 }

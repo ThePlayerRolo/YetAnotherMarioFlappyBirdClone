@@ -15,4 +15,3 @@ Vector2 ZeroVector2();
 
 int max(int a, int b);
 int min(int a, int b);
-f32 moveToward(f32, f32, f32);

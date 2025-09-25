@@ -9,17 +9,21 @@
 #include "types.h"
 #include "collison.h"
 
+#define PIPE_START 330.0f
+
 typedef struct {
     Vector2 mPos;
-    Vector2 mRot;
-    Vector2 mScale;
     Vector2 mVel;
     CollisionBox mColBox;
     sprite_t* mSprite;
-    rdpq_blitparms_t mBlitParams;
-} Mario;
+    rdpq_blitparms_t mBlitParams; 
+    bool mIsTopPipe;
+} Pipe;
 
-Mario* marioInit(Vector2);
-void marioUpdate(Mario*);
-void marioDraw(Mario*);
+Pipe* pipeInit(Vector2, bool);
+void  pipeUpdate(Pipe*);
+void pipeDraw(Pipe*);
 
+extern const Vector2 PipeYValues[3];
+extern Pipe* pipeBottom;
+extern Pipe* pipeTop;

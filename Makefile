@@ -5,6 +5,7 @@ BUILD_DIR=build
 ASSETS_DIR=assets
 IMAGE_FILES:=$(wildcard $(ASSETS_DIR)/*.png)
 FILE_DIR=filesystem
+FILE_CLEAN_DIR= filesystem/**
 TTF_DIR = $(wildcard assets/*.ttf)
 WAV_DIR = $(wildcard assets/*.wav)
 TTF_CONV = $(addprefix filesystem/,$(notdir $(TTF_DIR:%.ttf=%.font64)))
@@ -22,7 +23,7 @@ include $(N64_INST)/include/n64.mk
 all: YAMarioFlappyBirdC.z64
 .PHONY: all
 
-OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o $(BUILD_DIR)/$(SRC_DIR)/util.o $(BUILD_DIR)/$(SRC_DIR)/collision.o  $(BUILD_DIR)/$(SRC_DIR)/input.o  $(BUILD_DIR)/$(SRC_DIR)/mario.o   $(BUILD_DIR)/$(SRC_DIR)/game.o 
+OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o $(BUILD_DIR)/$(SRC_DIR)/util.o $(BUILD_DIR)/$(SRC_DIR)/collision.o  $(BUILD_DIR)/$(SRC_DIR)/input.o  $(BUILD_DIR)/$(SRC_DIR)/mario.o   $(BUILD_DIR)/$(SRC_DIR)/game.o  $(BUILD_DIR)/$(SRC_DIR)/pipe.o 
 
 
 MKSPRITE_FLAGS = --compress 0 --format RGBA16
@@ -63,6 +64,7 @@ $(BUILD_DIR)/YAMarioFlappyBirdC.dfs: $(wildcard $(FILE_DIR))
 
 clean:
 	rm -rf $(BUILD_DIR) *.z64
+	
 .PHONY: clean
 
 -include $(wildcard $(BUILD_DIR)/*.d)
