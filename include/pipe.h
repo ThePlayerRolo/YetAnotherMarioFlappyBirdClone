@@ -10,6 +10,7 @@
 #include "collison.h"
 
 #define PIPE_START 330.0f
+#define PIPE_COUNT 4
 
 typedef struct {
     Vector2 mPos;
@@ -18,12 +19,15 @@ typedef struct {
     sprite_t* mSprite;
     rdpq_blitparms_t mBlitParams; 
     bool mIsTopPipe;
+    bool mIsFirst;
+    u8 mGroup;
+    f32 startPosX;
 } Pipe;
 
-Pipe* pipeInit(Vector2, bool);
-void  pipeUpdate(Pipe*);
-void pipeDraw(Pipe*);
+void pipeArrayInit();
+void pipeArrayUpdate();
+void pipeArrayDraw();
+void pipeArrayFree();
 
-extern const Vector2 PipeYValues[3];
-extern Pipe* pipeBottom;
-extern Pipe* pipeTop;
+extern Pipe* BottomPipes[PIPE_COUNT];
+extern Pipe* TopPipes[PIPE_COUNT];

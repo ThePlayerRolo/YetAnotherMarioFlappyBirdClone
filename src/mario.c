@@ -41,19 +41,24 @@ void marioUpdateVel(Mario* this, f32 max) {
 }
 
 bool marioCheckPipeCollision(Mario* this) {
-    if (checkIfCollide(&this->mColBox, &pipeTop->mColBox) || checkIfCollide(&this->mColBox, &pipeBottom->mColBox)) {
-        return true;
+    bool isCollide = false;
+    for (u8 i = 0; i < 3; i++) {
+        if (checkIfCollide(&this->mColBox, &BottomPipes[i]->mColBox) || checkIfCollide(&this->mColBox, &TopPipes[i]->mColBox)) {
+            isCollide = true;
+            break;
+        }
     }
-    return false;
+    return isCollide;
 }
 bool marioCheckScreenCollision(Mario* this) {
-    if ((this->mColBox.pos.y + this->mColBox.height) > 208 || this->mColBox.pos.y < 0) {
+    if ((this->mColBox.pos.y + this->mColBox.height) > 208) {
         return true;
     }
     return false;
 }
 
 void marioUpdateGame(Mario* this) {
+    //marioCheckPipeCollision(this)
     if (marioCheckPipeCollision(this) || marioCheckScreenCollision(this)) {
         switchGameState(STATE_ENDSCREEN);
     }
@@ -75,6 +80,7 @@ void marioUpdateEndScreen(Mario* this) {
 void marioUpdateTitle(Mario* this) {
     this->mPos = SetVector2(50.0f,120.0f);
     this->mVel  = this->mRot = ZeroVector2();
+    this->mColBox.pos = this->mPos;
     
 }
 void marioUpdate(Mario* this) { 
@@ -96,8 +102,5 @@ void marioUpdate(Mario* this) {
 
 
 void marioDraw(Mario* this) {
-    rdpq_sprite_blit(this->mSprite, this->mPos.x, this->mPos.y, &this->mBlitParams);
-    rdpq_set_mode_fill(SetColor(255,0,0,255));
-    rdpq_fill_rectangle(this->mColBox.pos.x, this->mColBox.pos.y, (this->mColBox.pos.x + this->mColBox.width), (this->mColBox.pos.y + this->mColBox.height));
-    rdpq_set_mode_standard();
+   rdpq_sprite_blit(this->mSprite, this->mPos.x, this->mPos.y, &this->mBlitParams);
 }

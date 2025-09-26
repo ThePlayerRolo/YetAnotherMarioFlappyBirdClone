@@ -12,7 +12,10 @@
 #include "../include/pipe.h"
 
 Mario* mario;
+sprite_t* groundSprite;
 
+void renderGround() {
+}
 
 void render() {
 	surface_t * disp = display_get();
@@ -21,9 +24,17 @@ void render() {
 	rdpq_fill_rectangle(0,0, 320,240);
 	rdpq_set_mode_standard();
 	rdpq_mode_alphacompare(1);
+	pipeArrayDraw();
+	for (f32 i = 0;  i < 320; i += 32) {
+		rdpq_sprite_blit(groundSprite, i, 208, &(rdpq_blitparms_t) {
+        	.s0 = 0, 
+        	.cx = 0,
+        	.cy = 0,
+        	.width = 0, 
+        	.flip_x = 0,
+    	});
+	}
 	marioDraw(mario);
-	pipeDraw(pipeBottom);
-	pipeDraw(pipeTop);
 	rdpq_detach_show();
 }
 /* main code entry point */
@@ -36,17 +47,17 @@ int main(void)
 	rdpq_init();
 	joypad_init();
 	switchGameState(STATE_TITLE);
+	groundSprite = sprite_load("rom://Ground.sprite");
 	mario = marioInit(SetVector2(50.0f,120.0f));
-	pipeBottom = pipeInit(SetVector2(PIPE_START, PipeYValues[0].x), false);
-	pipeTop = pipeInit(SetVector2(PIPE_START, PipeYValues[0].y), true);
+	pipeArrayInit();
 	while(1) {
 		handleButtons();
 		manageStates();
 		marioUpdate(mario);
-		pipeUpdate(pipeBottom);
-		pipeUpdate(pipeTop);
+		pipeArrayUpdate();
 		render();
 	}
 	free(mario);
+	pipeArrayFree();
 	return 0;
 }
