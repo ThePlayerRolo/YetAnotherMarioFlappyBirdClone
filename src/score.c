@@ -64,7 +64,10 @@ void scoreBoxDraw(ScoreBox* this) {
 }
 
 void scoreSaveHighScore() {
-    
+    u8* buffer = malloc( sizeof(u8));
+    buffer[0] = highScore;
+    eeprom_write(0,buffer);
+    free(buffer);
 }
 
 void scoreUpdate() {
@@ -80,5 +83,14 @@ void scoreUpdate() {
 
 void scoreInit() {
     gameScore = 0;
-    //Todo: Add loading saved high score
+    u8* buffer = malloc( sizeof(u8));
+    eeprom_read(0, buffer);
+    if (buffer[0] == 0xFF) {
+        buffer[0] = 0;
+        eeprom_write(0,buffer);
+    }
+    eeprom_read(0, buffer);
+    highScore = buffer[0];
+    free(buffer);
+
 }

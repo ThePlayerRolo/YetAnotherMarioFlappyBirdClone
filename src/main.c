@@ -36,7 +36,7 @@ void render() {
 	marioDraw(mario);
 	//scoreBoxDraw(Game_ScoreBox);
 	rdpq_text_printf(NULL, 1, 140, 40, "%d", gameScore);
-	//rdpq_text_printf(NULL, 1, 180, 40, "%d", highScore);
+	rdpq_text_printf(NULL, 1, 180, 40, "%d", highScore);
 	manageRenderStates();
 	rdpq_detach_show();
 }

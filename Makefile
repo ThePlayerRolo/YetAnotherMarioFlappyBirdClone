@@ -50,13 +50,13 @@ filesystem/%.wav64: assets/%.wav
 
 
 YAMarioFlappyBirdC.z64: N64_ROM_TITLE = "YAMarioFlappyBirdC"
+YAMarioFlappyBirdC.z64: N64_ED64ROMCONFIGFLAGS=-w eeprom4k
 YAMarioFlappyBirdC.z64: $(SPRITE_FILES)
 YAMarioFlappyBirdC.z64: $(TTF_CONV)
 YAMarioFlappyBirdC.z64: $(WAV_COV)
 YAMarioFlappyBirdC.z64: $(XM_COV)
 YAMarioFlappyBirdC.z64: $(BUILD_DIR)/YAMarioFlappyBirdC.dfs
 YAMarioFlappyBirdC.z64: $(BUILD_DIR)/$(SRC_DIR)
-
 
 
 $(BUILD_DIR)/YAMarioFlappyBirdC.elf: $(OBJS)

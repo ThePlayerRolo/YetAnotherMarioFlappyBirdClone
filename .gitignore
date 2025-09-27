@@ -5,6 +5,8 @@ filesystem/
 *.z64
 .vscode/
 .idea/
+*.eeprom
+*.pak
 
 # Blender backup files
 *.blend[0-9]
