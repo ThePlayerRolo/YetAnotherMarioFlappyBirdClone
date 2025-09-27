@@ -59,7 +59,7 @@ bool marioCheckScreenCollision(Mario* this) {
 
 void marioUpdateGame(Mario* this) {
     //marioCheckPipeCollision(this)
-    if (marioCheckScreenCollision(this)) {
+    if (marioCheckPipeCollision(this) || marioCheckScreenCollision(this)) {
         switchGameState(STATE_ENDSCREEN);
     }
     if (buttons.a) {

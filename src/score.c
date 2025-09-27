@@ -30,7 +30,9 @@ void scoreBoxGameUpdate(ScoreBox* this) {
     
     if (checkIfCollide(&this->mColBox, &mario->mColBox) && !this->mDebounce) {
         this->mDebounce = true;
-        gameScore += 255;
+        if (gameScore != 255) {
+            gameScore++;
+        }
         this->curPipe++;
         if (this->curPipe > PIPE_COUNT - 1) {
             this->curPipe = 0;
