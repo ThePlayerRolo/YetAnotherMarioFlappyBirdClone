@@ -9,6 +9,8 @@
 #include "types.h"
 #include "collison.h"
 
+#define MARIO_GRAVITY 1
+
 typedef struct {
     Vector2 mPos;
     Vector2 mRot;
@@ -22,4 +24,6 @@ typedef struct {
 Mario* marioInit(Vector2);
 void marioUpdate(Mario*);
 void marioDraw(Mario*);
+
+extern Mario* mario;
 

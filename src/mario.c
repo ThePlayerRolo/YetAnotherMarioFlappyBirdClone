@@ -12,8 +12,8 @@
 #include "../include/game.h"
 #include "../include/pipe.h"
 
+Mario* mario;
 
-#define MARIO_GRAVITY 1
 //C++ terms? In my C?
 Mario* marioInit(Vector2 pPos) {
     Mario* this = malloc(sizeof(Mario));
@@ -59,7 +59,7 @@ bool marioCheckScreenCollision(Mario* this) {
 
 void marioUpdateGame(Mario* this) {
     //marioCheckPipeCollision(this)
-    if (marioCheckPipeCollision(this) || marioCheckScreenCollision(this)) {
+    if (marioCheckScreenCollision(this)) {
         switchGameState(STATE_ENDSCREEN);
     }
     if (buttons.a) {

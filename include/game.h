@@ -21,3 +21,4 @@ extern GAME_STATES curGameState;
 void switchGameState(GAME_STATES);
 
 void manageStates();
+void manageRenderStates();

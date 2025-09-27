@@ -17,13 +17,13 @@ XM_COV = $(addprefix filesystem/,$(notdir $(XM1_DIR:%.xm=%.xm64))) \
 
 
 SPRITE_FILES=$(subst assets,filesystem,$(IMAGE_FILES:.png=.sprite))
-MKFONT_FLAGS ?= --range all --size 20
+MKFONT_FLAGS ?= --range all --size 30 --outline 2
 include $(N64_INST)/include/n64.mk
 
 all: YAMarioFlappyBirdC.z64
 .PHONY: all
 
-OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o $(BUILD_DIR)/$(SRC_DIR)/util.o $(BUILD_DIR)/$(SRC_DIR)/collision.o  $(BUILD_DIR)/$(SRC_DIR)/input.o  $(BUILD_DIR)/$(SRC_DIR)/mario.o   $(BUILD_DIR)/$(SRC_DIR)/game.o  $(BUILD_DIR)/$(SRC_DIR)/pipe.o 
+OBJS =  $(BUILD_DIR)/$(SRC_DIR)/main.o $(BUILD_DIR)/$(SRC_DIR)/util.o $(BUILD_DIR)/$(SRC_DIR)/collision.o  $(BUILD_DIR)/$(SRC_DIR)/input.o  $(BUILD_DIR)/$(SRC_DIR)/mario.o   $(BUILD_DIR)/$(SRC_DIR)/game.o  $(BUILD_DIR)/$(SRC_DIR)/pipe.o $(BUILD_DIR)/$(SRC_DIR)/score.o  $(BUILD_DIR)/$(SRC_DIR)/font.o 
 
 
 MKSPRITE_FLAGS = --compress 0 --format RGBA16

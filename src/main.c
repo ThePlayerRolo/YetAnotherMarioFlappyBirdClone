@@ -10,12 +10,11 @@
 #include "../include/mario.h"
 #include "../include/game.h"
 #include "../include/pipe.h"
-
-Mario* mario;
+#include "../include/score.h"
+#include "../include/font.h"
 sprite_t* groundSprite;
+ScoreBox* Game_ScoreBox;
 
-void renderGround() {
-}
 
 void render() {
 	surface_t * disp = display_get();
@@ -35,6 +34,10 @@ void render() {
     	});
 	}
 	marioDraw(mario);
+	//scoreBoxDraw(Game_ScoreBox);
+	rdpq_text_printf(NULL, 1, 140, 40, "%d", gameScore);
+	//rdpq_text_printf(NULL, 1, 180, 40, "%d", highScore);
+	manageRenderStates();
 	rdpq_detach_show();
 }
 /* main code entry point */
@@ -46,15 +49,20 @@ int main(void)
     mixer_init(4);
 	rdpq_init();
 	joypad_init();
+	FontInit();
 	switchGameState(STATE_TITLE);
 	groundSprite = sprite_load("rom://Ground.sprite");
 	mario = marioInit(SetVector2(50.0f,120.0f));
 	pipeArrayInit();
+	Game_ScoreBox = scoreBoxInit(SetVector2(0.0f,120.0f));
+	scoreInit();
 	while(1) {
 		handleButtons();
 		manageStates();
 		marioUpdate(mario);
 		pipeArrayUpdate();
+		scoreBoxUpdate(Game_ScoreBox);
+		scoreUpdate();
 		render();
 	}
 	free(mario);
