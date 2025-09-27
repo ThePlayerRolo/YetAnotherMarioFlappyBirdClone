@@ -12,8 +12,8 @@
 #include "../include/mario.h"
 #include "../include/score.h"
 
-int gameScore = 0;
-int highScore = 0;
+u8 gameScore = 0;
+u8 highScore = 0;
 
 ScoreBox* scoreBoxInit(Vector2 pPos) {
     ScoreBox* newScoreBox = malloc(sizeof(ScoreBox));
@@ -30,7 +30,7 @@ void scoreBoxGameUpdate(ScoreBox* this) {
     
     if (checkIfCollide(&this->mColBox, &mario->mColBox) && !this->mDebounce) {
         this->mDebounce = true;
-        gameScore++;
+        gameScore += 255;
         this->curPipe++;
         if (this->curPipe > PIPE_COUNT - 1) {
             this->curPipe = 0;
@@ -63,12 +63,24 @@ void scoreBoxDraw(ScoreBox* this) {
     rdpq_mode_alphacompare(1); 
 }
 
+
+//Everything below here is bad. Like really bad.
+//I wish I could make score's type u32 but I can't figure out a way to convert that to a u8 array
+void scoreAddHighScore() {
+    u8* buffer = malloc(sizeof(u8));
+    eeprom_read(0,buffer);
+    highScore = buffer[0];
+    free(buffer);
+}
+
+
 void scoreSaveHighScore() {
-    u8* buffer = malloc( sizeof(u8));
+    u8* buffer = malloc(sizeof(u8));
     buffer[0] = highScore;
     eeprom_write(0,buffer);
     free(buffer);
 }
+
 
 void scoreUpdate() {
     if (curGameState == STATE_TITLE) {
@@ -83,14 +95,20 @@ void scoreUpdate() {
 
 void scoreInit() {
     gameScore = 0;
-    u8* buffer = malloc( sizeof(u8));
-    eeprom_read(0, buffer);
-    if (buffer[0] == 0xFF) {
-        buffer[0] = 0;
-        eeprom_write(0,buffer);
+    bool isFirst = false;
+    u8* bufferCheck = malloc( 2 * sizeof(u8));
+    eeprom_read(1, bufferCheck);
+    if (bufferCheck[0] == 0xFF) {
+        bufferCheck[0] = 0;
+        eeprom_write(1,bufferCheck);
+        isFirst = true;
     }
-    eeprom_read(0, buffer);
-    highScore = buffer[0];
-    free(buffer);
+    free(bufferCheck);
 
+    if (isFirst) {
+        highScore = 0;
+        scoreSaveHighScore();
+    } else {
+        scoreAddHighScore();
+    }
 }

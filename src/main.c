@@ -37,6 +37,7 @@ void render() {
 	//scoreBoxDraw(Game_ScoreBox);
 	rdpq_text_printf(NULL, 1, 140, 40, "%d", gameScore);
 	rdpq_text_printf(NULL, 1, 180, 40, "%d", highScore);
+//	rdpq_text_printf(NULL,  1, 250, 40, "%d", (highScore / 255));
 	manageRenderStates();
 	rdpq_detach_show();
 }

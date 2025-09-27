@@ -20,8 +20,8 @@ typedef struct {
     bool mDebounce;
 } ScoreBox;
 
-extern int gameScore;
-extern int highScore;
+extern u8 gameScore;
+extern u8 highScore;
 ScoreBox* scoreBoxInit(Vector2);
 void scoreBoxUpdate(ScoreBox* this);
 void scoreBoxDraw(ScoreBox* this);
